@@ -6,7 +6,6 @@ from pyrogram.types import Message
 from pyrogram import filters, Client, idle
 from youtube_search import YoutubeSearch
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from config import Config
 
 ## Extra Fns -------
 # Convert hh:mm:ss to seconds
