@@ -106,7 +106,7 @@ def a(client, message):
         print(e)
 
 @Client.on_message(filters.command(["video"]))
-async def video(client, message):
+def a(client, message):
     query = ''
     for i in message.command[1:]:
         query += ' ' + str(i)
