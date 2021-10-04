@@ -47,7 +47,7 @@ async def about(client, message):
     )
 
 @Client.on_message(filters.command(['song']))
-async def song(client, message, Message):
+def a(client, message, Message):
     query = ''
     for i in message.command[1:]:
         query += ' ' + str(i)
