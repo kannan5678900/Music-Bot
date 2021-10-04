@@ -15,7 +15,7 @@ def time_to_seconds(time):
 
 
 @Client.on_message(filters.command(['video']))
-def video(client, message):
+async def video(client, message):
     query = ''
     for i in message.command[1:]:
         query += ' ' + str(i)
