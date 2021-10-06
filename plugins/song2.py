@@ -6,7 +6,7 @@ import threading
 import os
 from pyrogram import Client, filters
 
-from bot import BOT_TOKEN
+from bot import BOT_TOKEN, bot
 
 def txtfinder(txt):
     a = txt.find("https://open.spotify.com")
