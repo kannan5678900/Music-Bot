@@ -9,3 +9,4 @@ ffmpeg
 eyeD3
 lyricsgenius
 spotipy
+telepot
