@@ -5,14 +5,7 @@ import requests
 import threading
 import os
 
-if 'BOT_TOKEN' in os.environ:
-    token = os.environ.get('BOT_TOKEN')
-else:
-    token = 'token bot'
-bot = telepot.Bot(token)
-
-sort = {}
-
+from bot import BOT_TOKEN
 
 def txtfinder(txt):
     a = txt.find("https://open.spotify.com")
@@ -123,7 +116,7 @@ print('Listening ...')
 
 
 
-tokenurl = f'https://api.telegram.org/bot{token}'
+tokenurl = f'https://api.telegram.org/bot{BOT_TOKEN}'
 Update = tokenurl+"/getUpdates"
 
 
