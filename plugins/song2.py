@@ -6,6 +6,9 @@ import threading
 import os
 from pyrogram import Client, filters
 
+msg = message['message']['text']
+chat_id = message['message']['from']['id']
+               
 def txtfinder(txt):
     a = txt.find("https://open.spotify.com")
     txt = txt[a:]
