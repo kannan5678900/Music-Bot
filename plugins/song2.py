@@ -6,8 +6,28 @@ import threading
 import os
 from pyrogram import Client, filters
 
-msg = message['message']['text']
-chat_id = message['message']['from']['id']
+tokenurl = f'https://api.telegram.org/bot{token}'
+Update = tokenurl+"/getUpdates"
+
+
+def UPDATE():
+    MESSAGES = requests.get(Update).json()
+    return MESSAGES['result']
+
+
+while 1:
+    if threading.activeCount()-1 < 15:
+        try:
+            for message in UPDATE():
+                offset = message['update_id']+1
+                offset = Update+f"?offset={offset}"
+                offset = requests.post(offset)
+                msg = message['message']['text']
+                chat_id = message['message']['from']['id']
+                thread = threading.Thread(target=START,args=(msg,chat_id))
+                thread.start()
+        except:
+            pass
                
 def txtfinder(txt):
     a = txt.find("https://open.spotify.com")
