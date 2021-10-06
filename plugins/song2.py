@@ -4,6 +4,7 @@ import spotify
 import requests
 import threading
 import os
+from pyrogram import Client, filters
 
 from bot import BOT_TOKEN
 
@@ -50,8 +51,9 @@ def downloader(link,chat_id,type):
             cantfindone(chat_id)
 
 
-def START(msg,chat_id):
-    print(f"{chat_id}:{msg}")
+
+@Client.on_message(filters.private & filters.regex("http|https"))
+async def upload(client,message)
     msglink = txtfinder(msg)
     if msglink[:30]==('https://open.spotify.com/album') :
         downloader(msg,chat_id,'AL')
@@ -60,9 +62,9 @@ def START(msg,chat_id):
         try:
             SONGDOWNLOADER(msg, chat_id)
         except:
-            bot.sendSticker(chat_id,
+            message.sendSticker(chat_id,
                             'CAACAgQAAxkBAAIFSWBF_m3GHUtZJxQzobvD_iWxYVClAAJuAgACh4hSOhXuVi2-7-xQHgQ')
-            bot.sendMessage(chat_id, "can't download music")
+            message.reply_text(chat_id, "can't download music")
 
     elif msg[:33] == 'https://open.spotify.com/playlist':
         downloader(msg,chat_id,'PL')
@@ -70,50 +72,8 @@ def START(msg,chat_id):
     elif msglink[:31] == ('https://open.spotify.com/artist'):
             downloader(msg,chat_id,'AR')
 
-    elif msg == "/start":
-        bot.sendMessage(chat_id,
-                        "Hi \nsend me spotify link and I'll give you music\nor use /single or /album or "
-                        "/artist")
-
-    elif msg == "/album":
-        sort[chat_id]='album'
-        bot.sendMessage(chat_id, 'send name and name of artist like this: \nName album\nor for better search use this:\nName album - Name artist')
-
-    elif msg == '/single':
-        sort[chat_id]='single'
-        bot.sendMessage(chat_id,'send name and name of artist like this: \nName song\nor for better search use this:\nName song - Name artist')
-    elif msg == '/artist':
-        sort[chat_id]='artist'
-        bot.sendMessage(chat_id,'send name and name of artist like this: \nName artist')
-
-    else:
-        try:
-            if sort[chat_id]=='artist':
-                try:
-                    downloader(spotify.searchartist(msg),chat_id,'AR')
-                    del sort[chat_id]
-                except:
-                    cantfind(chat_id)
-            elif sort[chat_id]=='album':
-                try:
-                    downloader(spotify.searchalbum(msg),chat_id,'AL')
-                    del sort[chat_id]
-                except:
-                    cantfind(chat_id)
-            elif sort[chat_id]=='single':
-                try:
-                    SONGDOWNLOADER(spotify.searchsingle(msg), chat_id)
-                    del sort[chat_id]
-                except:
-                    cantfind(chat_id)
-        except:
-            bot.sendSticker(chat_id, 'CAACAgQAAxkBAAIBFGBLNcpfFcTLxnn5lR20ZbE2EJbrAAJRAQACEqdqA2XZDc7OSUrIHgQ')
-            bot.sendMessage(chat_id,'send me link or use /single or /album or /artist')
-
 
 print('Listening ...')
-
-
 
 
 tokenurl = f'https://api.telegram.org/bot{BOT_TOKEN}'
