@@ -4,6 +4,7 @@ import spotify
 import requests
 import threading
 import os
+from pyrogram import Client, filters
 
 def txtfinder(txt):
     a = txt.find("https://open.spotify.com")
@@ -48,8 +49,8 @@ def downloader(link,chat_id,type):
             cantfindone(chat_id)
 
 
-def START(msg,chat_id):
-    print(f"{chat_id}:{msg}")
+@Client.on_message(filters.private & filters.regex("http|https"))
+async def spotify(client,message):
     msglink = txtfinder(msg)
     if msglink[:30]==('https://open.spotify.com/album') :
         downloader(msg,chat_id,'AL')
