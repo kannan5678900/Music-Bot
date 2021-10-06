@@ -49,7 +49,7 @@ def downloader(link,chat_id,type):
             cantfindone(chat_id)
 
 
-@Client.on_message(filters.private & filters.regex("http|https"))
+@Client.on_message(filters.private & filters.regex("https://open.spotify.com|https"))
 async def spotify(client,message):
     msglink = txtfinder(msg)
     if msglink[:30]==('https://open.spotify.com/album') :
