@@ -6,20 +6,18 @@ import threading
 import os
 from pyrogram import Client, filters
 
-from bot import BOT_TOKEN, bot
-
 def txtfinder(txt):
     a = txt.find("https://open.spotify.com")
     txt = txt[a:]
     return txt
 
-def cantfind(chat_id):
-    bot.sendSticker(chat_id, 'CAACAgQAAxkBAAIBE2BLNclvKLFHC-grzNdOEXKGl6cLAALzAAMSp2oDSBk1Yo7wCGUeBA')
-    bot.sendMessage(chat_id, "can't find it")
+def cantfind(chat_id, client):
+    client.sendSticker(chat_id, 'CAACAgQAAxkBAAIBE2BLNclvKLFHC-grzNdOEXKGl6cLAALzAAMSp2oDSBk1Yo7wCGUeBA')
+    client.sendMessage(chat_id, "can't find it")
 
-def cantfindone(chat_id):
-    bot.sendSticker(chat_id, 'CAACAgQAAxkBAAIFSWBF_m3GHUtZJxQzobvD_iWxYVClAAJuAgACh4hSOhXuVi2-7-xQHgQ')
-    bot.sendMessage(chat_id, "can't download one of them")
+def cantfindone(chat_id, client):
+    client.sendSticker(chat_id, 'CAACAgQAAxkBAAIFSWBF_m3GHUtZJxQzobvD_iWxYVClAAJuAgACh4hSOhXuVi2-7-xQHgQ')
+    client.sendMessage(chat_id, "can't download one of them")
 
 def downloader(link,chat_id,type):
     PLAYLIST = False
