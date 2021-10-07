@@ -64,7 +64,7 @@ async def downloadr(client,message)
         except:
             client.sendSticker(chat_id,
                             'CAACAgQAAxkBAAIFSWBF_m3GHUtZJxQzobvD_iWxYVClAAJuAgACh4hSOhXuVi2-7-xQHgQ')
-            client.reply_text(chat_id, "can't download music")
+            message.reply_text(chat_id, "can't download music")
 
     elif msglink[:33] == 'https://open.spotify.com/playlist':
         downloader(message,chat_id,'PL')
