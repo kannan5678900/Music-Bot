@@ -51,23 +51,23 @@ def downloader(link,chat_id,type):
 
 @Client.on_message(filters.regex(pattern=".*https.* (.*)"))
 async def a(client, message):
-          msglink = txtfinder(message)
+          msglink = txtfinder(msg)
           if msglink[:30]==('https://open.spotify.com/album') :
-              downloader(message,chat_id,'AL')
+              downloader(msg,chat_id,'AL')
 
           elif msglink[:30]== ('https://open.spotify.com/track')  :
               try:
-                  SONGDOWNLOADER(message, chat_id)
+                  SONGDOWNLOADER(msg, chat_id)
               except:
                   client.sendSticker(chat_id,
                                         'CAACAgQAAxkBAAIFSWBF_m3GHUtZJxQzobvD_iWxYVClAAJuAgACh4hSOhXuVi2-7-xQHgQ')
                   message.reply_text(chat_id, "can't download music")
 
           elif msglink[:33] == 'https://open.spotify.com/playlist':
-                downloader(message,chat_id,'PL')
+                downloader(msg,chat_id,'PL')
 
           elif msglink[:31] == ('https://open.spotify.com/artist'):
-                downloader(message,chat_id,'AR')
+                downloader(msg,chat_id,'AR')
 
 
 print()
