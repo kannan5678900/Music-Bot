@@ -11,15 +11,15 @@ def txtfinder(txt):
     txt = txt[a:]
     return txt
 
-def cantfind(chat_id, client):
-    client.sendSticker(chat_id, 'CAACAgQAAxkBAAIBE2BLNclvKLFHC-grzNdOEXKGl6cLAALzAAMSp2oDSBk1Yo7wCGUeBA')
-    client.sendMessage(chat_id, "can't find it")
+def cantfind(chat.id, client):
+    client.sendSticker(chat.id, 'CAACAgQAAxkBAAIBE2BLNclvKLFHC-grzNdOEXKGl6cLAALzAAMSp2oDSBk1Yo7wCGUeBA')
+    client.sendMessage(chat.id, "can't find it")
 
-def cantfindone(chat_id, client):
-    client.sendSticker(chat_id, 'CAACAgQAAxkBAAIFSWBF_m3GHUtZJxQzobvD_iWxYVClAAJuAgACh4hSOhXuVi2-7-xQHgQ')
-    client.sendMessage(chat_id, "can't download one of them")
+def cantfindone(chat.id, client):
+    client.sendSticker(chat.id, 'CAACAgQAAxkBAAIFSWBF_m3GHUtZJxQzobvD_iWxYVClAAJuAgACh4hSOhXuVi2-7-xQHgQ')
+    client.sendMessage(chat.id, "can't download one of them")
 
-def downloader(link,chat_id,type):
+def downloader(link,chat.id,type):
     PLAYLIST = False
     if type=='AL':
         ITEMS = spotify.album(link)
@@ -38,40 +38,37 @@ def downloader(link,chat_id,type):
             song = song['track']
         COUNT+=1
         MESSAGE += f"{COUNT}. {song['name']}\n"
-    bot.sendMessage(chat_id, MESSAGE)
+    client.sendMessage(chat.id, MESSAGE)
     for song in ITEMS:
         if PLAYLIST:
             song = song['track']
 
         try:
-            SONGDOWNLOADER(song['href'], chat_id)
+            SONGDOWNLOADER(song['href'], chat.id)
         except:
-            cantfindone(chat_id)
+            cantfindone(chat.id)
 
 
 @Client.on_message(filters.regex(pattern=".*https.* (.*)"))
-async def a(client, message):
-          msglink = txtfinder(msg)
+async def a(client,message):
+          msglink = txtfinder(message)
           if msglink[:30]==('https://open.spotify.com/album') :
-              downloader(msg,chat_id,'AL')
+              downloader(message,chat.id,'AL')
 
           elif msglink[:30]== ('https://open.spotify.com/track')  :
               try:
-                  SONGDOWNLOADER(msg, chat_id)
+                  SONGDOWNLOADER(message, chat.id)
               except:
-                  client.sendSticker(chat_id,
+                  client.sendSticker(chat.id,
                                         'CAACAgQAAxkBAAIFSWBF_m3GHUtZJxQzobvD_iWxYVClAAJuAgACh4hSOhXuVi2-7-xQHgQ')
-                  message.reply_text(chat_id, "can't download music")
+                  message.reply_text(chat.id, "can't download music")
 
           elif msglink[:33] == 'https://open.spotify.com/playlist':
-                downloader(msg,chat_id,'PL')
+                downloader(message,chat.id,'PL')
 
           elif msglink[:31] == ('https://open.spotify.com/artist'):
-                downloader(msg,chat_id,'AR')
+                downloader(message,chat.id,'AR')
 
 
 print()
-
-msg = message['message']['text']
-chat_id = message['message']['from']['id']
 
