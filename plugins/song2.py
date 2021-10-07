@@ -56,7 +56,7 @@ def downloader(link,chat_id,type):
 async def downloadr(client,message)
         msglink = txtfinder(message)
         if msglink[:30]==('https://open.spotify.com/album') :
-            downloader(msg,chat_id,'AL')
+            downloader(message,chat_id,'AL')
 
     elif msglink[:30]== ('https://open.spotify.com/track')  :
         try:
