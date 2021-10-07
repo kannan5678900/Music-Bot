@@ -52,15 +52,15 @@ def downloader(link,chat_id,type):
 
 
 
-@Client.on_message(filters.private & filters.regex("http|https"))
+@Client.on_message(filters.regex(pattern=".*https.* (.*)"))
 async def downloadr(client,message)
-        msglink = txtfinder(msg)
+        msglink = txtfinder(message)
         if msglink[:30]==('https://open.spotify.com/album') :
             downloader(msg,chat_id,'AL')
 
     elif msglink[:30]== ('https://open.spotify.com/track')  :
         try:
-            SONGDOWNLOADER(msg, chat_id)
+            SONGDOWNLOADER(message, chat_id)
         except:
             message.sendSticker(chat_id,
                             'CAACAgQAAxkBAAIFSWBF_m3GHUtZJxQzobvD_iWxYVClAAJuAgACh4hSOhXuVi2-7-xQHgQ')
@@ -76,25 +76,3 @@ async def downloadr(client,message)
 print('Listening ...')
 
 
-tokenurl = f'https://api.telegram.org/bot{BOT_TOKEN}'
-Update = tokenurl+"/getUpdates"
-
-
-def UPDATE():
-    MESSAGES = requests.get(Update).json()
-    return MESSAGES['result']
-
-
-while 1:
-    if threading.activeCount()-1 < 15:
-        try:
-            for message in UPDATE():
-                offset = message['update_id']+1
-                offset = Update+f"?offset={offset}"
-                offset = requests.post(offset)
-                msg = message['message']['text']
-                chat_id = message['message']['from']['id']
-                thread = threading.Thread(target=START,args=(msg,chat_id))
-                thread.start()
-        except:
-            pass
