@@ -49,7 +49,6 @@ def downloader(link,chat_id,type):
             cantfindone(chat_id)
 
 
-
 @Client.on_message(filters.regex(pattern=".*https.* (.*)"))
 async def a(client, message):
           msglink = txtfinder(message)
@@ -71,6 +70,8 @@ async def a(client, message):
                 downloader(message,chat_id,'AR')
 
 
-print('Listening ...')
+print()
 
+msg = message['message']['text']
+chat_id = message['message']['from']['id']
 
